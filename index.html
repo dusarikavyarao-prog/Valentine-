@@ -1,1 +1,172 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My NB ❤️</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Georgia,serif;
+text-align:center;
+color:#fff;
+background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffc3a0);
+min-height:100vh;
+}
+.container{padding:25px 15px}
+h1{font-size:35px}
+p{font-size:18px;line-height:1.8}
+.heart{font-size:70px;animation:beat 1s infinite}
+@keyframes beat{50%{transform:scale(1.2)}}
+button{
+border:0;border-radius:30px;padding:14px 25px;
+background:white;color:#ff4081;font-size:17px;
+margin:12px;cursor:pointer;
+}
+.gallery{
+width:90%;max-width:350px;height:420px;
+margin:25px auto;border:5px solid white;
+border-radius:25px;overflow:hidden;
+}
+.gallery img{width:100%;height:100%;object-fit:cover}
+#letter{
+display:none;background:#fff7fb;color:#e84378;
+max-width:450px;margin:25px auto;padding:25px;
+border-radius:25px;line-height:1.8;
+}
+#answer{font-size:24px;margin:20px}
+.heartfall{
+position:fixed;top:-30px;pointer-events:none;
+animation:fall 5s linear forwards;
+}
+@keyframes fall{
+to{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="heart">❤️</div>
+<h1>For My NB 😘</h1>
+
+<p>Hey my favorite person 🥹💗</p>
+
+<p>
+You make my world beautiful.<br>
+Every moment with you is special.<br>
+You are my happiness, my comfort,<br>
+and my favorite feeling. 🫂
+</p>
+
+<button onclick="playSong()">🎵 Play Our Song</button>
+<p id="musicText">Tap to start our special song ❤️</p>
+
+<video id="song" loop playsinline preload="auto"
+style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none">
+<source src="song.mp4" type="video/mp4">
+</video>
+
+<h2>Our Beautiful Memories 📸</h2>
+
+<div class="gallery">
+<img id="photo" src="photo1.jpg" alt="Our memory">
+</div>
+
+<p>Every picture holds a little piece of my heart 💗</p>
+
+<button onclick="openLetter()">Open My Love Letter 💌</button>
+
+<div id="letter">
+
+<h2>My Dear NB ❤️</h2>
+
+<p>
+I don't know how to explain how much you mean to me.
+But one thing I know is that my heart chooses you
+again and again. 💗
+</p>
+
+<p>
+I love your smile, your presence,
+and everything that makes you YOU.
+</p>
+
+<p>
+I want more memories, more hugs,
+more smiles, and more beautiful moments with you. 🥹
+</p>
+
+<h2>I love uh NB😘🫂</h2>
+<h2>Will uh be my valentine? 💖</h2>
+
+<button onclick="yes()">YES ❤️</button>
+<button onclick="no()">No 🙈</button>
+
+<div id="answer"></div>
+</div>
+
+<p>Made with endless love ❤️</p>
+
+</div>
+
+<script>
+function playSong(){
+let s=document.getElementById("song");
+s.muted=false;
+s.volume=1;
+s.play().then(()=>{
+document.getElementById("musicText").innerHTML="Our song is playing 🎶❤️";
+}).catch(()=>{
+document.getElementById("musicText").innerHTML="Tap again to play 🎵";
+});
+}
+
+const photos=[
+"photo1.jpg",
+"photo2.jpg",
+"photo3.jpg",
+"photo4.jpg"
+];
+
+let i=0;
+setInterval(()=>{
+i=(i+1)%photos.length;
+document.getElementById("photo").src=photos[i];
+},3500);
+
+function openLetter(){
+document.getElementById("letter").style.display="block";
+document.getElementById("letter").scrollIntoView({behavior:"smooth"});
+}
+
+function yes(){
+document.getElementById("answer").innerHTML=
+"YAYYYYY 😭❤️🫂 FOREVER MY VALENTINE!!";
+for(let j=0;j<50;j++)heart();
+}
+
+function no(){
+document.getElementById("answer").innerHTML="Hehe try again 😘❤️";
+}
+
+function heart(){
+let h=document.createElement("div");
+h.className="heartfall";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*30)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+}
+
+setInterval(heart,500);
+</script>
+
+</body>
+</html>
+
