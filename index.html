@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My NB ❤️</title>
 
 <style>
@@ -12,27 +12,24 @@ body{
 margin:0;
 font-family:Georgia,serif;
 text-align:center;
-color:white;
+color:#fff;
 background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffc3a0);
 min-height:100vh;
-overflow-x:hidden;
 }
 .container{padding:25px 15px}
-h1{font-size:34px;text-shadow:2px 2px 8px #ff4081}
-p{font-size:18px;line-height:1.7}
+h1{font-size:35px}
+p{font-size:18px;line-height:1.8}
 .heart{font-size:70px;animation:beat 1s infinite}
 @keyframes beat{50%{transform:scale(1.2)}}
 button{
-background:white;color:#ff4081;border:0;
-border-radius:30px;padding:14px 25px;
-margin:12px;font-size:17px;
-box-shadow:0 5px 15px #0002;
+border:0;border-radius:30px;padding:14px 25px;
+background:white;color:#ff4081;font-size:17px;
+margin:12px;cursor:pointer;
 }
 .gallery{
 width:90%;max-width:350px;height:420px;
 margin:25px auto;border:5px solid white;
 border-radius:25px;overflow:hidden;
-background:#fff4f8;
 }
 .gallery img{width:100%;height:100%;object-fit:cover}
 #letter{
@@ -40,15 +37,14 @@ display:none;background:#fff7fb;color:#e84378;
 max-width:450px;margin:25px auto;padding:25px;
 border-radius:25px;line-height:1.8;
 }
-#answer{font-size:23px;margin:20px;font-weight:bold}
+#answer{font-size:24px;margin:20px}
 .heartfall{
 position:fixed;top:-30px;pointer-events:none;
-animation:fall 5s linear forwards;z-index:10
+animation:fall 5s linear forwards;
 }
 @keyframes fall{
 to{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
-.footer{margin:35px}
 </style>
 </head>
 
@@ -59,6 +55,7 @@ to{transform:translateY(110vh) rotate(360deg);opacity:0}
 <h1>For My NB 😘</h1>
 
 <p>Hey my favorite person 🥹💗</p>
+
 <p>
 You make my world beautiful.<br>
 Every moment with you is special.<br>
@@ -66,11 +63,10 @@ You are my happiness, my comfort,<br>
 and my favorite feeling. 🫂
 </p>
 
-<button onclick="startSong()">🎵 Play Our Song</button>
-<p id="musicStatus">Tap to play our special song ❤️</p>
+<button onclick="playSong()">🎵 Play Our Song</button>
+<p id="musicText">Tap to start our special song ❤️</p>
 
-<!-- Hidden video: only its sound will play -->
-<video id="bgSong" loop playsinline preload="auto"
+<video id="song" loop playsinline preload="auto"
 style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none">
 <source src="song.mp4" type="video/mp4">
 </video>
@@ -78,14 +74,15 @@ style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none">
 <h2>Our Beautiful Memories 📸</h2>
 
 <div class="gallery">
-<img id="slideshow" src="photo1.jpg" alt="Our memory">
+<img id="photo" src="photo1.jpg" alt="Our memory">
 </div>
 
 <p>Every picture holds a little piece of my heart 💗</p>
 
-<button onclick="showLetter()">Open My Love Letter 💌</button>
+<button onclick="openLetter()">Open My Love Letter 💌</button>
 
 <div id="letter">
+
 <h2>My Dear NB ❤️</h2>
 
 <p>
@@ -104,27 +101,28 @@ I want more memories, more hugs,
 more smiles, and more beautiful moments with you. 🥹
 </p>
 
-<h2>I LOVE UH NB 😘🫂</h2>
-<h2>Will uh be my Valentine? 💖</h2>
+<h2>I love uh NB😘🫂</h2>
+<h2>Will uh be my valentine? 💖</h2>
 
-<button onclick="yes()">YESSS ❤️</button>
+<button onclick="yes()">YES ❤️</button>
 <button onclick="no()">No 🙈</button>
 
 <div id="answer"></div>
 </div>
 
-<div class="footer">Made with endless love ❤️</div>
+<p>Made with endless love ❤️</p>
+
 </div>
 
 <script>
-function startSong(){
-const song=document.getElementById("bgSong");
-song.muted=false;
-song.volume=1;
-song.play().then(()=>{
-document.getElementById("musicStatus").innerHTML="Our song is playing 🎶❤️";
+function playSong(){
+let s=document.getElementById("song");
+s.muted=false;
+s.volume=1;
+s.play().then(()=>{
+document.getElementById("musicText").innerHTML="Our song is playing 🎶❤️";
 }).catch(()=>{
-document.getElementById("musicStatus").innerHTML="Tap Play Our Song again 🎵";
+document.getElementById("musicText").innerHTML="Tap again to play 🎵";
 });
 }
 
@@ -135,14 +133,13 @@ const photos=[
 "photo4.jpg"
 ];
 
-let photoIndex=0;
-
+let i=0;
 setInterval(()=>{
-photoIndex=(photoIndex+1)%photos.length;
-document.getElementById("slideshow").src=photos[photoIndex];
+i=(i+1)%photos.length;
+document.getElementById("photo").src=photos[i];
 },3500);
 
-function showLetter(){
+function openLetter(){
 document.getElementById("letter").style.display="block";
 document.getElementById("letter").scrollIntoView({behavior:"smooth"});
 }
@@ -150,24 +147,25 @@ document.getElementById("letter").scrollIntoView({behavior:"smooth"});
 function yes(){
 document.getElementById("answer").innerHTML=
 "YAYYYYY 😭❤️🫂 FOREVER MY VALENTINE!!";
-for(let i=0;i<50;i++)createHeart();
+for(let j=0;j<50;j++)heart();
 }
 
 function no(){
 document.getElementById("answer").innerHTML="Hehe try again 😘❤️";
 }
 
-function createHeart(){
+function heart(){
 let h=document.createElement("div");
 h.className="heartfall";
-h.innerHTML=["❤️","💗","💕","💖"][Math.floor(Math.random()*4)];
+h.innerHTML="❤️";
 h.style.left=Math.random()*100+"vw";
 h.style.fontSize=(20+Math.random()*30)+"px";
 document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
+setTimeout(()=>h.remove(),5000);
 }
 
-setInterval(createHeart,500);
+setInterval(heart,500);
 </script>
+
 </body>
-</html>.
+</html>
